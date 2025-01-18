@@ -1,0 +1,28 @@
+{
+  "posts" : [
+    {
+      "id" : 1,
+      "title" : "제목1입니다",
+      "content" : "내용1입니다.",
+      "author" : "작성자1",
+      "createAt" : "2025-01-23",
+      "category" : "한국어교육센터 소개"
+    },
+    {
+      "id" : 2,
+      "title" : "제목2입니다",
+      "content" : "내용2입니다.",
+      "author" : "작성자2",
+      "createAt" : "2025-01-23",
+      "category" : "오시는길"
+    },
+    {
+      "id" : 3,
+      "title" : "제목3입니다",
+      "content" : "내용3입니다.",
+      "author" : "작성자3",
+      "createAt" : "2025-01-23",
+      "category" : "강사진 및 교직원 소개"
+    }
+  ]
+}

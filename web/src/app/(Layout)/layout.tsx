@@ -80,7 +80,7 @@ export default function RootLayout({
         <Link href={'/center-intro'}>
         {smallMenu[language]?.centerIntro}
         </Link>
-        <Link href={'/center-intro'}>
+        <Link href={'/how-to-get-here'}>
         {smallMenu[language]?.howToGetHere}
         </Link>
         <Link href={'/center-intro'}>
