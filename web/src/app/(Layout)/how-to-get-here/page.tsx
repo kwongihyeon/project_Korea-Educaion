@@ -1,7 +1,7 @@
 import HtmlDocs from "../components/htmlDocs";
 import { smallMenu } from "@/app/menu";
 
-export default function CenterIntro() {
+export default function howToGetHere() {
   const name = smallMenu["korean"].howToGetHere
 
   return (

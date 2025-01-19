@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useState } from "react";
-import { smallMenu } from "@/app/menu";
 import useCustomFetch from "@/app/lib/customFetch";
 
 type HtmlDocsProps = {
@@ -10,7 +9,7 @@ type HtmlDocsProps = {
 export default function HtmlDocs(name : HtmlDocsProps) {
   const [content, setContent] = useState<string>("");
   const customFetch = useCustomFetch()
-  const language = "korean" // 로컬스토리지에서 가져오는 코드로 변경해야함함
+  const language = "korean" // 로컬스토리지에서 가져오는 코드로 변경해야함
   console.log(name.name)
 
   useEffect(()=>{
@@ -31,6 +30,9 @@ export default function HtmlDocs(name : HtmlDocsProps) {
 
   return (
     <div className="w-full h-screen">
+      <img src="/images/영진소개배너.jpg" className="w-full h-60 mt-4 flex justify-center items-center">
+      </img>
+      <div className="h-12 border"></div>
       <div className="w-full flex justify-center items-center font-bold text-3xl" style={{height : "200px"}}>
         {name.name}
       </div>

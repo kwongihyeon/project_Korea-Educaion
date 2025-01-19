@@ -83,7 +83,7 @@ export default function RootLayout({
         <Link href={'/how-to-get-here'}>
         {smallMenu[language]?.howToGetHere}
         </Link>
-        <Link href={'/center-intro'}>
+        <Link href={'/staff-intro'}>
         {smallMenu[language]?.staffIntro}
         </Link>
         </div>

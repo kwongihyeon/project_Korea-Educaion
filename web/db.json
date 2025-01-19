@@ -24,5 +24,53 @@
       "createAt" : "2025-01-23",
       "category" : "강사진 및 교직원 소개"
     }
-  ]
+  ],
+  "staff": {
+    "teacher" : [
+      {
+        "id" : 1,
+        "name" : "최현서",
+        "position" : "강사",
+        "phone" : null,
+        "email" : null
+      },
+      {
+        "id" : 2,
+        "name" : "권기현",
+        "position" : "강사",
+        "phone" : null,
+        "email" : null
+      },
+      {
+        "id" : 3,
+        "name" : "이한",
+        "position" : "강사",
+        "phone" : null,
+        "email" : null
+      }
+    ],
+    "staff" : [
+      {
+        "id" : 4,
+        "name" : "문성윤",
+        "position" : "센터장",
+        "phone" : "010-1234-5678",
+        "email" : "test1234@naver.com"
+      },
+      {
+        "id" : 5,
+        "name" : "구진모",
+        "position" : "팀원",
+        "phone" : "010-4321-8765",
+        "email" : "test5678@naver.com"
+      },
+      {
+        "id" : 6,
+        "name" : "차승현",
+        "position" : "팀원",
+        "phone" : "010-1010-4822",
+        "email" : "test8390@naver.com"
+      }
+    ]
+  }
 }
