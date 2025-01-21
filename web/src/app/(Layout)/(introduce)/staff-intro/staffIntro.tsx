@@ -41,8 +41,6 @@ export default function StaffIntro(name : HtmlDocsProps){
 
   return (
     <div className="w-full h-screen">
-      <img src="/images/영진소개배너.jpg" className="w-full h-60 mt-4 flex justify-center items-center">
-      </img>
       <div className="h-12 border"></div>
       <div className="w-full flex justify-center items-center font-bold text-3xl" style={{height : "200px"}}>
         {name.name}

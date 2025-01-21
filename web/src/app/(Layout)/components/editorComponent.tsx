@@ -2,6 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
+// 미완성
+
 export default function EditorComponent() {
   const editorRef = useRef<any>(null); // tinymce를 직접 조작하는 
   const [content, setContent] = useState<string>("");
@@ -12,10 +14,6 @@ export default function EditorComponent() {
     setIsClient(true);
   }, []);
 
-  const contentChange = (e: any) => {
-    setContent(e.target.getContent());
-    console.log(content);
-  }
 
   const handleFileSelect = async () => {
     const input = fileInputRef.current;
@@ -25,7 +23,7 @@ export default function EditorComponent() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch("/upload", {
+        const response = await fetch("/upload", { // 주소 바꿔야함, body랑 헤더를 커스텀 함수를 만들어서 보내는걸로로 변경해야함
           method: "POST",
           body: formData,
         });
@@ -58,11 +56,14 @@ export default function EditorComponent() {
           onInit: (_: any, editor: any) => {
             editorRef.current = editor;
           },
-          onChange: contentChange,
           file_picker_types: "image", // 파일 선택기에서 다룰 파일 형식
-          file_picker_callback: (callback) => {
+          file_picker_callback: () => {
             fileInputRef.current?.click(); 
           },
+        }}
+        onEditorChange={(item)=>{
+          setContent(item)
+          console.log(content)
         }}
       />
       <input
