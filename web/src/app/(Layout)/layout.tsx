@@ -46,7 +46,6 @@ export default function RootLayout({
 
       </div>
       <div className="w-full min-h-25 bg-[#0072BA] flex items-center pl-5 peer">
-        
         <img src="/images/영진로고.png"
         className="w-15 h-15">
         </img>
@@ -90,7 +89,7 @@ export default function RootLayout({
         </Link>
         </div>
         <div className="flex flex-col">
-        <Link href={'/select-guidance/curriculum'}>
+        <Link href={'/korea-curriculum'}>
         {smallMenu[language]?.koreaCurriculum}
         </Link>
         <Link href={'/open-campus'}>

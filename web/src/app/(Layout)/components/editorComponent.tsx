@@ -6,60 +6,17 @@ import parser from "html-react-parser"
 
 
 export default function EditorComponent() {
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<any>(null); // tinymce를 직접 조작하는 
   const [content, setContent] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [title, setTitle] = useState<string>("")
   const customFetch = useCustomFetch()
 
-  const [isMapVisible, setIsMapVisible] = useState(false);  // 구글 맵 관련 상태
-
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // 구글 맵 API를 한 번만 로드하는 함수
-  useEffect(() => {
-    // Google Maps API 로드 함수
-    const loadGoogleMapsAPI = () => {
-      const scriptId = "google-maps-api";
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initMap`;
-        script.id = scriptId;
-        script.async = true;
-        script.defer = true;
-        document.body.appendChild(script);
-
-        // 글로벌 함수 초기화
-        window.initMap = () => {
-          console.log("Google Map API Loaded");
-        };
-      }
-    };
-
-    loadGoogleMapsAPI();
-  }, []);
-
-  const insertGoogleMap = () => {
-    const iframeHtml = `
-      <div class="google-map-container" style="width: 100%; height: 500px; position: relative;">
-        <iframe 
-          src="https://www.google.com/maps/embed/v1/place?key=${process.env.GOOGLE_EMBED_API_KEY}&q=San+Francisco"
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen=""
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
-        </iframe>
-      </div>
-    `;
-    if (editorRef.current) {
-      editorRef.current.insertContent(iframeHtml);
-    }
-  };
 
   const submit = async() => {
     const formdata = new FormData()
@@ -107,7 +64,7 @@ export default function EditorComponent() {
   };
 
   if (!isClient) {
-    return null;
+    return null; 
   }
 
   const onChange = (e : any)=>{
@@ -133,14 +90,14 @@ export default function EditorComponent() {
             });
             editorRef.current = editor;
           },
-          file_picker_types: "image",
+          file_picker_types: "image", // 파일 선택기에서 다룰 파일 형식
           file_picker_callback: () => {
-            fileInputRef.current?.click();
+            fileInputRef.current?.click(); 
           },
         }}
-        onEditorChange={(item) => {
-          setContent(item);
-          console.log(content);
+        onEditorChange={(item)=>{
+          setContent(item)
+          console.log(content)
         }}
       />
       <input
