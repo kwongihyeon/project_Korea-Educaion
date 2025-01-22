@@ -1,13 +1,12 @@
 'use client'
 
+import { HtmlDocsProps } from "@/app/common/types";
 import useCustomFetch from "@/app/lib/customFetch"
 import { useEffect, useState } from "react"
+import { staffPage, getError } from "@/app/menu";
 
 
 
-type HtmlDocsProps = {
-  name : string
-}
 
 interface Teacher {
   id: number;
@@ -17,7 +16,7 @@ interface Teacher {
   email: string | null;
 }
 
-export default function StaffIntro(name : HtmlDocsProps){
+export default function StaffIntro({category} : HtmlDocsProps){
   const [teacher, setTeacher] = useState<Teacher[]>([])
   const [staff, setStaff] = useState<Teacher[]>([])
   const customFetch = useCustomFetch()
@@ -33,7 +32,8 @@ export default function StaffIntro(name : HtmlDocsProps){
         console.log(data.teacher)
         setStaff(data.staff)
       }catch(error){
-        console.error('강사 및 교직원 정보를 불러오지 못했습니다.')
+        alert(getError["korean"]?.staffError)
+        console.error(getError["korean"]?.staffError)
       }
     }
     staffData()
@@ -43,11 +43,11 @@ export default function StaffIntro(name : HtmlDocsProps){
     <div className="w-full h-screen">
       <div className="h-12 border"></div>
       <div className="w-full flex justify-center items-center font-bold text-3xl" style={{height : "200px"}}>
-        {name.name}
+        {category}
       </div>
       <div className="w-full h-24 flex items-center justify-center">
       <div className=" h-14 text-2xl font-bold w-4/5 border-b-2  border-[#0072BA] text-[#0093EE]">
-        강사진 소개
+        {staffPage["korean"]?.faculty}
       </div>
       </div>
       <div className="w-full flex flex-wrap justify-evenly mt-4">
@@ -63,7 +63,7 @@ export default function StaffIntro(name : HtmlDocsProps){
 </div>
 <div className="w-full h-24 flex items-center justify-center mt-6">
       <div className=" h-14 text-2xl font-bold w-4/5 border-b-2  border-[#0072BA] text-[#0093EE]">
-        교직원 소개
+      {staffPage["korean"]?.staff}
       </div>
       </div>
       <div className="w-full flex flex-wrap justify-evenly mt-4">

@@ -2,8 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import useCustomFetch from "@/app/lib/customFormFetch";
-import parser from "html-react-parser"
-
+import { editorCompo, postError } from "@/app/menu";
+import Cookies from "js-cookie";
 
 // 미완성
 
@@ -14,6 +14,7 @@ export default function EditorComponent() {
   const [isClient, setIsClient] = useState(false);
   const [title, setTitle] = useState<string>("")
   const customFetch = useCustomFetch()
+  const language = Cookies.get("language") || "korean"
 
   useEffect(() => {
     setIsClient(true);
@@ -34,7 +35,7 @@ export default function EditorComponent() {
     console.log(response)}
 
     catch(error){
-      alert('그 요청 안된다')
+      alert(postError[language]?.subError)
     }
   }
 
@@ -59,7 +60,7 @@ export default function EditorComponent() {
             editorRef.current.insertContent(`<img src="${imageUrl}"/>`);
           }
         } else {
-          console.error("업로드에 실패했습니다.");
+          console.error(postError[language]?.imgError);
         }
       }
     }
@@ -104,7 +105,7 @@ export default function EditorComponent() {
         style={{ display: "none" }}
         onChange={handleFileSelect}
       />
-      <button onClick={submit}>제출</button>
+      <button onClick={submit}>{editorCompo[language]?.submit}</button>
     </div>
   );
 }

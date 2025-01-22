@@ -1,4 +1,4 @@
-import HtmlDocsId from "../../../components/htmlDocsId"
+import HtmlDocsId from "../../../components/HtmlDocsId"
 
 
 interface GuidancePageProps {

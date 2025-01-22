@@ -1,3 +1,6 @@
+import { paginationPage } from "@/app/menu";
+import Cookies from "js-cookie";
+  
   // components/Pagination.tsx
   interface Props {
     currentPage: number;
@@ -10,6 +13,7 @@
 
   const Pagination: React.FC<Props> = ({ currentPage, totalPage, nextPage, prevPage, onPageChange, onUrlChange }) => {
     const pageNumbers = Array.from({ length: totalPage }, (_, index) => index + 1);
+    const language = Cookies.get('language') || "korean"
 
     return (
       <div className="flex items-center justify-center space-x-2">
@@ -18,7 +22,7 @@
             className="border px-3 py-1"
             onClick={() => onUrlChange(prevPage)}
           >
-            이전
+            {paginationPage[language]?.prev}
           </button>
         )}
 
@@ -37,7 +41,7 @@
             className="border px-3 py-1"
             onClick={() => onUrlChange(nextPage)}
           >
-            다음
+            {paginationPage[language]?.next}
           </button>
         )}
       </div>

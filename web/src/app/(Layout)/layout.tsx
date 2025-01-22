@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import japan from '../public/image/japan.png'
-import { guidanceMenu, menu, smallMenu } from "../menu";
-import { useEffect, useState } from "react";
-
+import { menu, smallMenu } from "../menu";
+import Cookies from "js-cookie";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +25,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //const language = localStorage.getItem('language')
-  const language = "korean"
+
+  //const language = (await cookies()).get('language')?.value || "korean"
+  const language = Cookies.get('language') || "korean"
+  console.log(language)
 
   return (
     <div className="h-screen w-full flex flex-col ">
