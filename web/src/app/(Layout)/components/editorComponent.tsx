@@ -5,8 +5,6 @@ import useCustomFetch from "@/app/lib/customFormFetch";
 import parser from "html-react-parser"
 
 
-// 미완성
-
 export default function EditorComponent() {
   const editorRef = useRef<any>(null);
   const [content, setContent] = useState<string>("");
@@ -90,7 +88,7 @@ export default function EditorComponent() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch("/attachments", { // 주소 바꿔야함, body랑 헤더를 커스텀 함수를 만들어서 보내는걸로로 변경해야함
+        const response = await fetch("/upload", {
           method: "POST",
           body: formData,
         });
@@ -122,12 +120,17 @@ export default function EditorComponent() {
     <div style={{ width: "60%" }}>
       <input className="w-40 border-2" onChange={onChange}></input>
       <Editor
-        apiKey={process.env.TINYMCE_API_KEY}
+        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API}
         init={{
           height: 500,
-          plugins: ["lists", "link", "image", "table"],
-          toolbar: "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | forecolor backcolor | table",
-          onInit: (_: any, editor: any) => {
+          plugins: ["lists", "link", "image"],
+          toolbar: "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | forecolor backcolor | custombutton",
+          setup: (editor: any) => {
+            editor.ui.registry.addButton("custombutton", {
+              tooltip: "Insert Google Map",
+              text: "Map",
+              onAction: insertGoogleMap,
+            });
             editorRef.current = editor;
           },
           file_picker_types: "image",
