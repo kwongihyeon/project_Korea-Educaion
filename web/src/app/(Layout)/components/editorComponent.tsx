@@ -122,7 +122,7 @@ export default function EditorComponent() {
     <div style={{ width: "60%" }}>
       <input className="w-40 border-2" onChange={onChange}></input>
       <Editor
-        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API}
+        apiKey={process.env.TINYMCE_API_KEY}
         init={{
           height: 500,
           plugins: ["lists", "link", "image", "table"],
