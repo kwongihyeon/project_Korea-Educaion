@@ -1,4 +1,4 @@
-export const menu = {
+export const menu = { // 예시메뉴
   korean : {
     introduce : '센터소개',
     curriculum : '과정소개',
@@ -8,7 +8,7 @@ export const menu = {
   }
 }
 
-export const smallMenu = {
+export const smallMenu = {  // 예시메뉴
   korean : {
     centerIntro : '한국어교육센터 소개',
     howToGetHere : '오시는길',
@@ -19,7 +19,7 @@ export const smallMenu = {
   }
 }
 
-export const guidanceMenu = {
+export const guidanceMenu = {  // 문서페이지 메뉴
   korean : {
     introduction : "한국어교육센터 소개",
     directions : "오시는 길",
@@ -30,13 +30,15 @@ export const guidanceMenu = {
   }
 }
 
-export const boardMenu = {
+export const boardMenu = {  // 게시판페이지 메뉴
   korean : {
     review : "유학생 후기",
-    applicationForm : "신청 서류",
-    learningMaterials : "학습 자료 안내",
+    "application-form" : "신청 서류",
+    "learning-materials" : "학습 자료 안내",
     notice : "공지사항",
     news : "한국어교육센터 소식",
     faq : "FAQ"
   }
 }
+
+export const testtest = ["메뉴1","메뉴2","메뉴3","메뉴4","메뉴5","메뉴6","메뉴7"]

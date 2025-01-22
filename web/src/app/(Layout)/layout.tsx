@@ -4,6 +4,8 @@ import "./globals.css";
 import Link from "next/link";
 import japan from '../public/image/japan.png'
 import { guidanceMenu, menu, smallMenu } from "../menu";
+import { useEffect, useState } from "react";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +27,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   //const language = localStorage.getItem('language')
   const language = "korean"
 
@@ -105,7 +106,7 @@ export default function RootLayout({
         <Link href={'/center-intro'}>
         {smallMenu[language]?.howToGetHere}
         </Link>
-        <Link href={'/board/applicationForm'}>
+        <Link href={'/board/application-form'}>
         {smallMenu[language]?.staffIntro}
         </Link>
         <Link href={'/guidance/visa'}>
@@ -119,7 +120,7 @@ export default function RootLayout({
         <Link href={'/guidance/facility'}>
         {smallMenu[language]?.howToGetHere}
         </Link>
-        <Link href={'/board/learningMaterials'}>
+        <Link href={'/board/learning-materials'}>
         {smallMenu[language]?.staffIntro}
         </Link>
         <Link href={'/guidance/insurance'}>

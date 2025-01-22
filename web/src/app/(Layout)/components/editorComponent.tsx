@@ -1,6 +1,9 @@
 'use client'
 import React, { useEffect, useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import useCustomFetch from "@/app/lib/customFormFetch";
+import parser from "html-react-parser"
+
 
 // 미완성
 
@@ -9,10 +12,31 @@ export default function EditorComponent() {
   const [content, setContent] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isClient, setIsClient] = useState(false);
+  const [title, setTitle] = useState<string>("")
+  const customFetch = useCustomFetch()
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+
+  const submit = async() => {
+    const formdata = new FormData()
+    formdata.append("title",title)
+    formdata.append("content",content)
+    formdata.append("category","review")
+    formdata.append("language","korean")
+
+    try{const response = await customFetch(`/posts`, {
+      method : 'POST',
+      body : formdata
+    })
+    console.log(response)}
+
+    catch(error){
+      alert('그 요청 안된다')
+    }
+  }
 
 
   const handleFileSelect = async () => {
@@ -23,16 +47,16 @@ export default function EditorComponent() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch("/upload", { // 주소 바꿔야함, body랑 헤더를 커스텀 함수를 만들어서 보내는걸로로 변경해야함
+        const response = await fetch("/attachments", { // 주소 바꿔야함, body랑 헤더를 커스텀 함수를 만들어서 보내는걸로로 변경해야함
           method: "POST",
           body: formData,
         });
-
+        // 반환받은 이미지url을 쿠키에 저장해놓고 업로드 버튼을 누를때 쿠키에서 이미지ur을 가져와서 백엔드로 보내줘야함
         if (response.ok) {
           const data = await response.json();
           const imageUrl = data.url;
           if (editorRef.current) {
-            editorRef.current.insertContent(`<img src="${imageUrl}" alt="${file.name}" />`);
+            editorRef.current.insertContent(`<img src="${imageUrl}"/>`);
           }
         } else {
           console.error("업로드에 실패했습니다.");
@@ -45,14 +69,21 @@ export default function EditorComponent() {
     return null; 
   }
 
+  const onChange = (e : any)=>{
+    setTitle(e.target.value)
+    console.log(title)
+  }
+
+
   return (
     <div style={{ width: "60%" }}>
+      <input className="w-40 border-2" onChange={onChange}></input>
       <Editor
-        apiKey="dkxgo7v9zvu93g67zowihgqjppgbxr7n3muiqmciqyc4drfq"
+        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API}
         init={{
           height: 500,
-          plugins: ["lists", "link", "image"],
-          toolbar: "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | forecolor backcolor",
+          plugins: ["lists", "link", "image", "table"],
+          toolbar: "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | forecolor backcolor | table",
           onInit: (_: any, editor: any) => {
             editorRef.current = editor;
           },
@@ -73,6 +104,7 @@ export default function EditorComponent() {
         style={{ display: "none" }}
         onChange={handleFileSelect}
       />
+      <button onClick={submit}>제출</button>
     </div>
   );
 }
