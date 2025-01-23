@@ -8,7 +8,7 @@ const SetCookie = () => {
     const currentLanguage = Cookies.get('language');
     console.log(currentLanguage)
     if (!currentLanguage) {
-      Cookies.set('language', 'english', {
+      Cookies.set('language', 'korean', {
         expires: 30, // 30일 동안 유지
         path: '/', // 모든 경로
       });

@@ -8,20 +8,26 @@ import Cookies from 'js-cookie';
 
 
 type HtmlDocsPropsId = {
-  [key in "id" | "category" ]: string;
+  // [key in "id" | "category" ]: string;
+  id? : string,
+  category? : string
+
 }
 
-
-export default function HtmlDocs({category} : HtmlDocsProps) {
+export default function HtmlDocs(props : HtmlDocsProps) {
   const [content, setContent] = useState<string>("");
   const customFetch = useCustomFetch()
+  let endpoint = ""
   const language = Cookies.get('language') || "korean"
-  console.log(category)
+  console.log(props.category)
+  console.log(props.id)
 
   useEffect(()=>{
     const introData = async ()=>{
       try{
-        const data = await customFetch(`/posts?category=${category}`,{ // korean을 하드코딩이 아닌 로컬스토리지에서 받아오는 식으로 수정
+        {props.id? endpoint=`/posts?id=${props.id}` : endpoint = `/posts?category=${props.category}`}
+        console.log(endpoint)
+        const data = await customFetch(endpoint,{ // korean을 하드코딩이 아닌 로컬스토리지에서 받아오는 식으로 수정
           method : "GET"
         })
         console.log(data)
@@ -38,7 +44,7 @@ export default function HtmlDocs({category} : HtmlDocsProps) {
     <div className="w-full h-screen">
       <div className="h-12 border"></div>
       <div className="w-full flex justify-center items-center font-bold text-3xl" style={{height : "200px"}}>
-        {guidanceMenu[language]?.[category]}
+        {props.category ? guidanceMenu[language]?.[props.category] : <></>}
 
       </div>
       <div className="w-full h-screen flex justify-center">

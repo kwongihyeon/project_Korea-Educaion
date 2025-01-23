@@ -1,5 +1,5 @@
 const useCustomFetch = () => {
-  const customFetch = async (endpoint: string, options = {}) => {
+  const customFormFetch = async (endpoint: string, options = {}) => {
     const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
     console.log(baseURL+endpoint)
     console.log(options)
@@ -17,7 +17,7 @@ const useCustomFetch = () => {
     // response.json()함수를 다른곳에서 쓰면 not a function에러가 뜸
   };
 
-  return customFetch;
+  return customFormFetch;
 };
 
 export default useCustomFetch
