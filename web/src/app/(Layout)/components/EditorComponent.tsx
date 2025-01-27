@@ -5,6 +5,7 @@ import useCustomFetch from "@/app/lib/customFormFetch";
 import { editorCompo, postError } from "@/app/menu";
 import Cookies from "js-cookie";
 import useCustomFormFetch from "@/app/lib/customFormFetch";
+import { Language } from "@/app/common/types";
 
 // 미완성
 
@@ -16,7 +17,7 @@ export default function EditorComponent() {
   const [title, setTitle] = useState<string>("")
   const customFetch = useCustomFetch()
   const customFormFetch = useCustomFormFetch()
-  const language = Cookies.get("language") || "korean"
+  const language : Language = Cookies.get("language") as Language || "korean"
 
   useEffect(() => {
     setIsClient(true);

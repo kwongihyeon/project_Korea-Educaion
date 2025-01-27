@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import Pagination from "./Pagination"
 import { boardPage, getError } from "@/app/menu"
 import Cookies from "js-cookie"
+import { Language } from "@/app/common/types"
 
 
 type BoardPageProps = {
@@ -30,7 +31,7 @@ export default function BoardPageCompo({name} : BoardPageProps){
   const [nextPage, setNextPage] = useState<string>(""); // 다음 페이지
   const [prevPage, setPrevPage] = useState<string>(""); // 이전 페이지
   const [totalPage, setTotalPage] = useState<number>(0);
-  const language = Cookies.get('language') || "korean"
+  const language : Language = Cookies.get('language') as Language || "korean"
 
   // 게시글 불러오기 함수
   const fetchBoard = async (currentPage : number) => {
@@ -109,7 +110,12 @@ export default function BoardPageCompo({name} : BoardPageProps){
         {boardData && boardData.length > 0 ? (
           boardData.map((item, index) => (
             <div key={index} className="w-4/5 h-12 border-b-2 border-black flex items-center">
+              {name === 'notice' ? 
+              <div className="w-1/5 pl-12 border rounded-sm">{boardPage[language]?.notice}</div> 
+              :   
               <div className="w-1/5 pl-12">{item.id}</div>
+              }
+              
               <Link href={`/board/${name}/${item.id}`} className="w-2/5 cursor-pointer">{item.title}</Link>
               <div className="w-1/5 flex justify-center">{item.author}</div>
               <div className="w-1/5 flex justify-center">{item.createdAt}</div>

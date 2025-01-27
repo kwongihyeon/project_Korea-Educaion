@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useCustomFetch from "@/app/lib/customFetch";
 import { guidanceMenu, getError } from "@/app/menu";
 import parser from "html-react-parser"
-import { HtmlDocsProps } from "@/app/common/types";
+import { HtmlDocsProps, Language } from "@/app/common/types";
 import Cookies from 'js-cookie';
 
 
@@ -18,7 +18,7 @@ export default function HtmlDocs(props : HtmlDocsProps) {
   const [content, setContent] = useState<string>("");
   const customFetch = useCustomFetch()
   let endpoint = ""
-  const language = Cookies.get('language') || "korean"
+  const language : Language = Cookies.get('language') as Language || "korean"
   console.log(props.category)
   console.log(props.id)
 

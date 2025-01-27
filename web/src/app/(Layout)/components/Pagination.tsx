@@ -1,3 +1,4 @@
+import { Language } from "@/app/common/types";
 import { paginationPage } from "@/app/menu";
 import Cookies from "js-cookie";
   
@@ -13,7 +14,7 @@ import Cookies from "js-cookie";
 
   const Pagination: React.FC<Props> = ({ currentPage, totalPage, nextPage, prevPage, onPageChange, onUrlChange }) => {
     const pageNumbers = Array.from({ length: totalPage }, (_, index) => index + 1);
-    const language = Cookies.get('language') || "korean"
+    const language : Language = Cookies.get('language') as Language || "korean"
 
     return (
       <div className="flex items-center justify-center space-x-2">

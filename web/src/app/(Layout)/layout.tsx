@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { menu, smallMenu } from "../menu";
+import { boardMenu, guidanceMenu, menu, smallMenu } from "../menu";
 import Cookies from "js-cookie";
 import { cookies } from "next/headers";
+import { Language } from "../common/types";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +28,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const language = (await cookies()).get('language')?.value || "korean"
-  //const language = Cookies.get('language') || "korean"
+  const language = (await cookies()).get('language')?.value as Language || Language.korean;
   console.log(language)
 
   return (
@@ -97,7 +97,7 @@ export default async function RootLayout({
         {smallMenu[language]?.openCampus}
         </Link>
         <Link href={'/board/review'}>
-        {smallMenu[language]?.internationalReview}
+        {boardMenu[language]?.review}
         </Link>
         </div>
         <div className="flex flex-col">
@@ -108,10 +108,10 @@ export default async function RootLayout({
         {smallMenu[language]?.howToGetHere}
         </Link>
         <Link href={'/board/application-form'}>
-        {smallMenu[language]?.staffIntro}
+        {boardMenu[language]?.["application-form"]}
         </Link>
         <Link href={'/guidance/visa'}>
-        {smallMenu[language]?.staffIntro}
+        {guidanceMenu[language]?.visa}
         </Link>
         </div>
         <div className="flex flex-col">
@@ -122,21 +122,21 @@ export default async function RootLayout({
         {smallMenu[language]?.howToGetHere}
         </Link>
         <Link href={'/board/learning-materials'}>
-        {smallMenu[language]?.staffIntro}
+        {boardMenu[language]?.["learning-materials"]}
         </Link>
         <Link href={'/guidance/insurance'}>
-        {smallMenu[language]?.staffIntro}
+        {guidanceMenu[language]?.insurance}
         </Link>
         </div>
         <div className="flex flex-col">
         <Link href={'/board/notice'}>
-        {smallMenu[language]?.centerIntro}
+        {boardMenu[language]?.notice}
         </Link>
         <Link href={'/board/news'}>
-        {smallMenu[language]?.howToGetHere}
+        {boardMenu[language]?.news}
         </Link>
         <Link href={'/board/faq'}>
-        {smallMenu[language]?.staffIntro}
+        {boardMenu[language]?.faq}
         </Link>
         </div>
         </div>

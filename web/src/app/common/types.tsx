@@ -13,3 +13,6 @@ export interface MenuType {
   [key: string]: { [key: string]: string } 
 }
 
+export enum Language {
+  korean = "korean",
+}
